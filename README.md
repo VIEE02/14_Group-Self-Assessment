@@ -26,7 +26,7 @@ Group Self Assessment là một ứng dụng giúp người dùng tạo và đá
 - i. Pull Project từ GitHub: Đầu tiên, hãy sử dụng Git để pull project từ GitHub về máy tính của bạn. Bạn có thể sử dụng lệnh sau trong terminal hoặc command prompt:
   - git clone https://github.com/VIEE02/14_Group-Self-Assessment.git
 - ii. Mở xampp, Chọn start Apache và MySql -> Chọn Admin của MySql, chọn 'mới' -> Tạo hệ csdl tên 'database6'.
-- iii. Chạy các câu lệnh trên terminal theo thứ tự: pip install -r requirements.txt để cài các thư viện cần dùng python manage.py makemigrations ->python manage.py migrate-> python manage.py runscript import_data-> python manage.py runscript populate_data_from_csv ->
+- iii. Chạy các câu lệnh trên terminal theo thứ tự: pip install -r requirements.txt để cài các thư viện cần dùng python manage.py makemigrations ->python manage.py migrate-> 
 -> python manage.py runserver
 - Sau khi hoàn tất các bước, web sẽ được chạy trên địa chỉ http://127.0.0.1:8000/.
 
