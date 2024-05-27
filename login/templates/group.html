@@ -1,0 +1,73 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'login/css/group.css' %}">
+    <title>Nhóm {{ group.groupname }}</title>
+    <script src="{%static 'login/js/myscript.js'%}"></script>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">NHÓM {{ group.groupname }}</h1>
+        <h2 class="title">Tạo ngày {{ group.created_at }}</h2>
+    </div>
+    <form method="post">
+        {% csrf_token %}
+        <input type="hidden" name="delete_group" value="true">
+        <button type="submit" style="color: red;">Xoá Nhóm</button>
+    </form>
+    <div class="group-actions">
+        <form method="post">
+            {% csrf_token %}
+            <label for="username">Username:</label>
+            <input type="text" name="username" id="username" required>
+            <input type="hidden" name="action" value="add">
+            <button class="add-member-btn" type="submit">Add Member</button>
+        </form>
+        <div style="flex-grow: 1;"></div>
+        <form method="post">
+            {% csrf_token %}
+            <label for="username">Username:</label>
+            <input type="text" name="username" id="username" required>
+            <input type="hidden" name="action" value="remove">
+            <button class="delete-group-btn" type="submit">Xoá Thành Viên</button>
+        </form>
+    </div>
+    <div class="member-container">
+        <div class="member-info">
+            <ul>
+                {% for member in members %}
+                    <li>Họ tên: {{ member.fullname }}  MSSV: {{ member.mssv }}  Tên lớp: {{ member.classname }}</li>
+                {% endfor %}
+            </ul>
+        </div> 
+         <div class="member-options">
+             <button class="option-btn">
+                <div class="options">
+                    <ul>
+                        {% for member in members %}
+                            <li>
+                                <button onclick="window.location.href='{% url 'evaluate_member' group_id=group.id member_id=member.id %}'">Đánh giá</button>"
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </button>
+        </div>
+    </div>
+    <a href="{% url 'group_summary' group_id=group.id %}">
+        <button>View Evaluation Summary</button>
+    </a>
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+        <!-- Thêm thêm các thành viên vào đây -->
+</body>
+</html>
