@@ -36,6 +36,8 @@ Group Self Assessment là một ứng dụng giúp người dùng tạo và đá
 - Hoàng Công Vũ - 21094651
 - Nguyễn Vũ Thiện - 21112151
 
+## Người tham gia :
 
-
-
+- [@VIEE02](https://www.github.com/VIEE02)
+- [@HoangCongVu](https://github.com/HoangCongVu)
+- [@ngvuthien](https://github.com/ngvuthien)
