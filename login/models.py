@@ -75,7 +75,7 @@ class DanhGia(models.Model):
     score3 = models.IntegerField()
     score = models.FloatField(null=True,blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    nguoidanhgia = models.CharField(max_length=255)
+    nguoidanhgia = models.CharField(max_length=255,null=True,blank=True)
 
     class Meta:
         db_table = 'danhgia'

@@ -142,7 +142,7 @@ def evaluate_member_view(request, group_id, member_id):
             evaluation.score = average_score
             evaluation.nguoidanhgia = member.fullname
             evaluation.save()
-            messages.success(request, f"Evaluation for {member.username} has been submitted.")
+            messages.success(request, f"Đánh giá cho {member.username} đã được gửi.")
             return redirect('group', group_id)
         else:
             print(form.errors)  # Debug: Print form errors to the console
@@ -159,6 +159,12 @@ def user_evaluations_view(request):
 
 @login_required
 def group_summary_view(request,group_id):
+    user = request.user
+    group = get_object_or_404(Group, id=group_id)
+    user_followed_groups = user.followed_user_id.split(',') if user.followed_user_id else []
+    if str(group_id) not in user_followed_groups:
+        messages.error(request, "Bạn không phải là nhóm trưởng của nhóm này.")
+        return redirect('group', group_id=group.id)
     group = get_object_or_404(Group, id=group_id)
     evaluations = DanhGia.objects.filter(groupid=group_id)
     return render(request, 'groupdanhgia.html', {'group': group, 'evaluations': evaluations})

@@ -13,10 +13,11 @@
     <link rel="stylesheet" href="{% static 'login/css/style3.css' %}">
 </head>
 <body>
+    
     <div class="container">
         <h1 class="title">Trang cá nhân</h1>
         <div class="profile-container">
-            <img src="{{ user.avatar }}" alt="Ảnh đại diện" class="avatar">
+            <img src="/media/{{ user.avatar }}" alt="Ảnh đại diện" class="avatar">
             <h2 class="username">{{ user.username }}</h2>
             <p class="info">ID: {{ user.id }}</p>
             <p class="info">Full Name: {{ user.fullname }}</p>
@@ -32,7 +33,7 @@
                 <input type="submit" value="Cập nhật">
             </form>
         </div>
+        <button class="back-button" onclick="window.location.href='{% url 'home' %}'">Trở về nhà</button>
     </div>
-    <button onclick="window.location.href='{% url 'home' %}" class="back-button">Trở về nhà</button>
 </body>
-</html>
+</html> 

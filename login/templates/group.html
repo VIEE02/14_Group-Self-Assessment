@@ -6,60 +6,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'login/css/group.css' %}">
     <title>Nhóm {{ group.groupname }}</title>
-    <script src="{%static 'login/js/myscript.js'%}"></script>
+    <script src="{% static 'login/js/myscript.js' %}"></script>
 </head>
 <body>
+    <button class="back-button" onclick="window.location.href='{% url 'home' %}'">Trở về</button>
+
     <div class="container">
         <h1 class="title">NHÓM {{ group.groupname }}</h1>
         <h2 class="title">Tạo ngày {{ group.created_at }}</h2>
     </div>
-    <form method="post">
-        {% csrf_token %}
-        <input type="hidden" name="delete_group" value="true">
-        <button type="submit" style="color: red;">Xoá Nhóm</button>
-    </form>
+
     <div class="group-actions">
         <form method="post">
             {% csrf_token %}
-            <label for="username">Username:</label>
+            <label for="username">Tên Thành Viên:</label>
             <input type="text" name="username" id="username" required>
             <input type="hidden" name="action" value="add">
-            <button class="add-member-btn" type="submit">Add Member</button>
+            <button class="add-member-btn" type="submit">Thêm thành viên</button>
         </form>
         <div style="flex-grow: 1;"></div>
         <form method="post">
             {% csrf_token %}
-            <label for="username">Username:</label>
+            <label for="username">Tên Thành Viên:</label>
             <input type="text" name="username" id="username" required>
             <input type="hidden" name="action" value="remove">
-            <button class="delete-group-btn" type="submit">Xoá Thành Viên</button>
+            <button class="delete-member-btn" type="submit">Xóa thành viên</button>
         </form>
     </div>
+
     <div class="member-container">
         <div class="member-info">
             <ul>
                 {% for member in members %}
-                    <li>Họ tên: {{ member.fullname }}  MSSV: {{ member.mssv }}  Tên lớp: {{ member.classname }}</li>
+                    <li>
+                        <span>Họ tên: {{ member.fullname }}</span>
+                        <span>MSSV: {{ member.mssv }}</span>
+                        <span>Tên lớp: {{ member.classname }}</span>
+                    </li>
                 {% endfor %}
             </ul>
-        </div> 
-         <div class="member-options">
-             <button class="option-btn">
-                <div class="options">
-                    <ul>
-                        {% for member in members %}
-                            <li>
-                                <button onclick="window.location.href='{% url 'evaluate_member' group_id=group.id member_id=member.id %}'">Đánh giá</button>"
-                            </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            </button>
+        </div>
+        <div class="member-options">
+            <ul>
+                {% for member in members %}
+                    <li>
+                        <button onclick="window.location.href='{% url 'evaluate_member' group_id=group.id member_id=member.id %}'">Đánh giá</button>
+                    </li>
+                {% endfor %}
+            </ul>
         </div>
     </div>
+
     <a href="{% url 'group_summary' group_id=group.id %}">
-        <button>View Evaluation Summary</button>
+        <button>Xem đánh giá</button>
     </a>
+
     {% if messages %}
         <ul>
             {% for message in messages %}
@@ -68,6 +69,10 @@
         </ul>
     {% endif %}
 
-        <!-- Thêm thêm các thành viên vào đây -->
+    <form method="post">
+        {% csrf_token %}
+        <input type="hidden" name="delete_group" value="true">
+        <button type="submit" class="delete-group-btn">Xóa nhóm</button>
+    </form>
 </body>
 </html>

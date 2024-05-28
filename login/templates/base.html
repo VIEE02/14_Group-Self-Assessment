@@ -48,8 +48,13 @@
                         <a class="dropdown-item" href="{% url 'group' group_id=group.id %}">Nhóm {{ group.groupname }}</a>
                     </li>
                   {% endfor %}
-                  <li><hr class="dropdown-divider"></li>
-                  <button onclick="showForm()">Tạo nhóm mới</button>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url "user_evaluations" %}">Xem đánh giá</a>
+            </li>
+            <li class="nav-item">
+              <button onclick="showForm()">Tạo nhóm mới</button>
                     <div class="dropdown-item" id="groupForm" style="display:none;">
                         <form method="post">
                             {% csrf_token %}
@@ -57,16 +62,6 @@
                             <button type="submit">Xác nhận</button>
                         </form>
                     </div>
-              </ul>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url "user_evaluations" %}">Xem đánh giá</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Cài đặt</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Hỗ trợ</a>
             </li>
           </ul>
           <form class="d-flex">
